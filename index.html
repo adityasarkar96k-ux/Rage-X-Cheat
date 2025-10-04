@@ -174,7 +174,7 @@
       const items = JSON.parse(localStorage.getItem('swami_feedbacks') || '[]');
       feedbackList.innerHTML = '';
       if (items.length === 0) {
-        feedbackList.innerHTML = '<p class="muted">अद्याप कोणतेही feedback नाही.</p>';
+        feedbackList.innerHTML = '<p class="muted">No feedbacks Now.</p>';
         return;
       }
       items.reverse().forEach((fb, idx) => {
