@@ -1,55 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choose Payment - Rage X Cheat</title>
-<link rel="stylesheet" href="style.css">
-<script>
-function showQR() {
-  document.getElementById('qr-section').style.display = 'block';
-  let time = 300;
-  const timer = setInterval(() => {
-    if(time <= 0){
-      clearInterval(timer);
-      document.getElementById('countdown').innerText = "Payment confirmed!";
-      document.getElementById('getkey').style.display = 'inline-block';
-    } else {
-      document.getElementById('countdown').innerText = `Wait ${time} seconds for your payment confirmation`;
-      time--;
-    }
-  }, 1000);
-}
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rage X Cheat — Payment</title>
 </head>
 <body>
 
-<header>
-  <h1>Rage X Cheat - Payment</h1>
-</header>
+  <!-- Header -->
+  <header style="background:linear-gradient(90deg,#000,#111);padding:18px 12px;position:sticky;top:0;z-index:40;">
+    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+      <a href="index.html" style="color:#fff;font-weight:800;text-decoration:none;font-size:20px;">Rage X Cheat</a>
+      <nav style="display:flex;gap:14px;">
+        <a href="index.html" style="color:#ddd;text-decoration:none;padding:8px;border-radius:6px;">Home</a>
+        <a href="about.html" style="color:#ddd;text-decoration:none;padding:8px;border-radius:6px;">About</a>
+        <a href="contact.html" style="color:#ddd;text-decoration:none;padding:8px;border-radius:6px;">Contact</a>
+        <button id="openFeedback" style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:#fff;cursor:pointer;">Feedback</button>
+      </nav>
+    </div>
+    <div style="height:6px;margin-top:12px;background:linear-gradient(90deg,#000,#333,#000);box-shadow:0 0 18px rgba(0,0,0,0.8);"></div>
+  </header>
 
-<main>
-  <h2>Select Your Payment Method</h2>
-  <div class="payment-options">
-    <button onclick="showQR()"><img src="gpay.png" alt="GPay"> GPay</button>
-    <button onclick="showQR()"><img src="upi.png" alt="UPI"> UPI</button>
-    <button onclick="showQR()"><img src="paytm.png" alt="Paytm"> Paytm</button>
-    <button onclick="showQR()"><img src="phonepe.png" alt="PhonePe"> PhonePe</button>
-    <button onclick="showQR()"><img src="fampay.png" alt="Fampay"> Fampay</button>
+  <!-- Main -->
+  <main style="max-width:1000px;margin:36px auto;padding:0 18px;text-align:center;">
+    <h2 style="font-size:26px;margin-bottom:6px;color:#000;">Choose Payment Method</h2>
+    <p style="color:#666;margin-bottom:18px;">Selected: <span id="selInfo" style="font-weight:700">product / duration / price</span></p>
+
+    <!-- Payment buttons -->
+    <div class="payment-options" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+      <button class="payBtn" data-method="gpay" onclick="showQR('gpay')">
+        <img src="images/gpay.png" alt="GPay" style="width:28px;vertical-align:middle;margin-right:8px"> GPay
+      </button>
+
+      <button class="payBtn" data-method="upi" onclick="showQR('upi')">
+        <img src="images/upi.png" alt="UPI" style="width:28px;vertical-align:middle;margin-right:8px"> UPI
+      </button>
+
+      <button class="payBtn" data-method="paytm" onclick="showQR('paytm')">
+        <img src="images/paytm.png" alt="Paytm" style="width:28px;vertical-align:middle;margin-right:8px"> Paytm
+      </button>
+
+      <button class="payBtn" data-method="phonepe" onclick="showQR('phonepe')">
+        <img src="images/phonepe.png" alt="PhonePe" style="width:28px;vertical-align:middle;margin-right:8px"> PhonePe
+      </button>
+
+      <button class="payBtn" data-method="fampay" onclick="showQR('fampay')">
+        <img src="images/fampay.png" alt="Fampay" style="width:28px;vertical-align:middle;margin-right:8px"> Fampay
+      </button>
+    </div>
+
+    <!-- QR + timer area -->
+    <section id="qr-section" style="display:none;margin-top:34px;background:#fff;border-radius:12px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,0.06);text-align:center;">
+      <h3 style="margin:0 0 8px;">Scan to Pay</h3>
+      <img id="qr-img" src="images/default-qr.png" alt="Payment QR" style="width:230px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
+
+      <p id="countdown" class="timer" style="margin-top:14px;font-weight:700;color:#ff3b3b;"></p>
+      <p style="margin-top:6px;color:#333;font-size:14px;" id="qrNote">Wait for payment confirmation — action will unlock Get Key.</p>
+
+      <p style="margin-top:12px;color:#117a65;font-weight:600;">Remember to install Telegram first</p>
+
+      <div style="margin-top:14px;">
+        <a id="getKeyBtn" href="#" style="display:none;background:linear-gradient(180deg,#000,#111);color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,0.2);">Get Key</a>
+      </div>
+    </section>
+
+    <p style="color:#888;margin-top:26px;font-size:13px;">If payment confirmed earlier, you can wait or click Get Key after confirmation.</p>
+  </main>
+
+  <!-- Feedback modal (simple, local) -->
+  <div id="feedbackModal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);">
+    <div style="background:#fff;padding:18px;border-radius:10px;max-width:520px;margin:20px;">
+      <button onclick="closeFeedback()" style="float:right;border:0;background:transparent;font-size:20px;cursor:pointer;">&times;</button>
+      <h3 style="margin-top:6px;color:#111;">Feedback</h3>
+      <form id="fbForm">
+        <input id="fbName" placeholder="Your name" style="width:100%;padding:8px;margin-top:8px;border-radius:8px;border:1px solid #ddd">
+        <textarea id="fbMsg" placeholder="Message" style="width:100%;height:80px;padding:8px;margin-top:8px;border-radius:8px;border:1px solid #ddd"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+          <button type="button" onclick="submitFeedback()" style="background:#000;color:#fff;padding:8px 12px;border-radius:8px;border:0;cursor:pointer;">Send</button>
+          <button type="button" onclick="closeFeedback()" style="background:transparent;padding:8px 12px;border-radius:8px;border:1px solid #ccc;cursor:pointer;">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <div id="qr-section" style="display:none;">
-    <h3>Scan to Pay</h3>
-    <img src="default-qr.png" alt="Payment QR" class="qr-img">
-    <p id="countdown"></p>
-    <p class="note">Remember to install Telegram first</p>
-    <a href="getkey.html" id="getkey" class="btn" style="display:none;">Get Key</a>
-  </div>
-</main>
+  <!-- Footer -->
+  <footer style="margin-top:60px;background:#111;padding:18px;color:#bbb;text-align:center;font-size:14px;border-top:3px solid #000;">
+    © <span id="yr"></span> Rage X Cheat — Secure Payment
+  </footer>
 
-<footer>
-  <p>© 2025 Rage X Cheat | Secure Payment</p>
-</footer>
+  <!-- JS + CSS (paste at bottom) -->
+  <script>
+    // read query params (if any) to show selected product/days/price
+    function qp(key){
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key);
+    }
+    const product = qp('product') || 'product';
+    const days = qp('days') || qp('key') || '';
+    const price = qp('price') || '';
+    document.getElementById('selInfo').textContent = `${product}${days? ' / ' + days : ''}${price? ' / ₹' + price : ''}`;
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Feedback modal
+    document.getElementById('openFeedback').addEventListener('click', ()=>{ document.getElementById('feedbackModal').style.display='flex'; });
+    function closeFeedback(){ document.getElementById('feedbackModal').style.display='none'; }
+    function submitFeedback(){
+      const n = document.getElementById('fbName').value.trim();
+      const m = document.getElementById('fbMsg').value.trim();
+      if(!n || !m){ alert('Please enter name and message'); return; }
+      const items = JSON.parse(localStorage.getItem('rx_feedbacks')||'[]');
+      items.push({name:n,msg:m,time:Date.now()});
+      localStorage.setItem('rx_feedbacks', JSON.stringify(items));
+      alert('Thanks — feedback saved locally.');
+      document.getElementById('fbForm').reset();
+      closeFeedback();
+    }
+
+    // QR / Timer logic
+    let countdownTimer = null;
+    function showQR(method){
+      // display qr section
+      document.getElementById('qr-section').style.display = 'block';
+      // optionally change qr image by method (you can add separate QR files per method)
+      const qrImg = document.getElementById('qr-img');
+      // fallback: default qr
+      const map = {
+        gpay: 'images/default-qr.png',
+        upi:  'images/default-qr.png',
+        paytm:'images/default-qr.png',
+        phonepe:'images/default-qr.png',
+        fampay:'images/default-qr.png'
+      };
+      qrImg.src = map[method] || 'images/default-qr.png';
+
+      // clear previous timer if any
+      if(countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+      // 5 minutes = 300 seconds
+      let timeLeft = 300;
+      const cd = document.getElementById('countdown');
+      const getKeyBtn = document.getElementById('getKeyBtn');
+      getKeyBtn.style.display = 'none';
+      // show initial text
+      updateCountdownText(timeLeft);
+
+      countdownTimer = setInterval(()=> {
+        timeLeft--;
+        if(timeLeft <= 0){
+          clearInterval(countdownTimer);
+          cd.innerText = 'Payment window expired or confirmed. Click Get Key if you already paid.';
+          // show get key button and enable
+          getKeyBtn.style.display = 'inline-block';
+          // prepare getKey URL with same params
+          const link = `getkey.html?product=${encodeURIComponent(product||'item')}&price=${encodeURIComponent(price||'')}&method=${encodeURIComponent(method||'')}&days=${encodeURIComponent(days||'')}`;
+          getKeyBtn.href = link;
+        } else {
+          updateCountdownText(timeLeft);
+        }
+      }, 1000);
+    }
+
+    function updateCountdownText(seconds){
+      const mm = Math.floor(seconds/60).toString().padStart(2,'0');
+      const ss = (seconds%60).toString().padStart(2,'0');
+      document.getElementById('countdown').innerText = `Wait ${mm}:${ss} minutes for your payment confirmation`;
+    }
+
+    // Clean unload timer
+    window.addEventListener('beforeunload', ()=> { if(countdownTimer) clearInterval(countdownTimer); });
+  </script>
+
+  <style>
+  /* ======= Theme CSS (paste into bottom) ======= */
+  :root{
+    --bg:#ffffff; --text:#111; --muted:#666; --accent:#000; --teal:#45a29e;
+  }
+  *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;}
+  body{margin:0;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  button.payBtn{background:#0b0c10;color:#fff;border:2px solid var(--teal);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+  button.payBtn:hover{background:var(--teal)}
+  main h2{letter-spacing:1px}
+  .timer{font-weight:800}
+  /* responsive */
+  @media (max-width:720px){
+    .payment-options{flex-direction:column}
+    button.payBtn{width:86%;margin:0 auto}
+  }
+  </style>
 
 </body>
 </html>
