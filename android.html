@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Swami Maharaj — Android</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header (same style as index) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <span class="brand-name">Swami Maharaj</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button id="feedbackBtn" class="btn-link">Feedback</button>
+      </nav>
+    </div>
+    <div class="header-glow-line"></div>
+  </header>
+
+  <!-- Main content -->
+  <main class="page">
+    <section class="container" style="max-width:900px;margin:32px auto;">
+      <div class="product-card" style="display:flex;flex-direction:column;gap:20px;align-items:center;">
+        <!-- PNG image (centered) -->
+        <div style="width:100%;max-width:520px;">
+          <img src="images/android-detail.png" alt="Android Hack Logo" style="width:100%;height:auto;border-radius:12px;object-fit:cover;box-shadow:0 10px 30px rgba(0,0,0,0.08);" />
+        </div>
+
+        <!-- Title + short note -->
+        <div style="text-align:center;">
+          <h1 style="margin:6px 0;font-size:24px;">Rank Push — Android</h1>
+          <p style="margin:0;color:var(--muted);max-width:720px;">
+            100% safe and secure for Android. 
+          </p>
+        </div>
+
+        <!-- Details box -->
+        <div style="width:100%;max-width:720px;background:#fff;border-radius:12px;padding:18px;border:1px solid rgba(0,0,0,0.04);box-shadow:var(--card-shadow);">
+          <h3 style="margin:0 0 10px;">Details</h3>
+
+          <ul style="margin:0 0 12px;padding-left:18px;color:var(--muted);">
+            <li>Compatibility: Android 8.0+ (Tested devices)</li>
+            <li>Features: Rank boost, stealth mode, auto-restore</li>
+            <li>Delivery: Instant key after payment</li>
+            <li>Support: Telegram staff 24/7</li>
+          </ul>
+
+          <!-- small area where you plan to add GIF for each detail -->
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+            <div style="flex:1;min-width:160px;">
+              <img src="images/android-detail-gif.gif" alt="demo gif" style="width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,0.04)" />
+            </div>
+
+            <div style="flex:2;min-width:220px;">
+              <p style="margin:0;color:var(--muted)">
+                
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Purchase controls -->
+        <div style="width:100%;max-width:720px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+          <div style="display:flex;gap:10px;align-items:center;">
+            <label style="font-weight:700;color:var(--muted)">Duration:</label>
+            <select id="daysSelect" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);">
+              <option value="3" data-price="199">3 days — ₹199</option>
+              <option value="7" data-price="349">7 days — ₹349</option>
+              <option value="15" data-price="599">15 days — ₹599</option>
+              <option value="30" data-price="999">30 days — ₹999</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div id="priceBadge" style="font-weight:900;font-size:18px;">₹199</div>
+            <!-- Buy Now redirects to payment page with query params -->
+            <a id="buyNowBtn" class="btn-primary" href="payment.html?product=android&days=3&price=199">Buy Now</a>
+          </div>
+        </div>
+
+        <p style="color:var(--muted);font-size:13px;max-width:720px;text-align:center;margin-top:6px;">
+         Clicking the Buy Now button will take you to the payment selection page — after payment, click the Get Key button to be redirected to our Telegram staff chat.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Feedback Modal (same as index) -->
+  <div id="feedbackModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="closeModal" class="close">&times;</button>
+      <h3>Feedback द्या (Saved locally)</h3>
+      <form id="feedbackForm">
+        <label>
+          Name:
+          <input type="text" id="fbName" required placeholder="Your Name" />
+        </label>
+        <label>
+          Message:
+          <textarea id="fbMsg" required placeholder="तुमचा message"></textarea>
+        </label>
+        <label>
+          Attach file (optional):
+          <input type="file" id="fbFile" accept="image/*,application/pdf" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Send Feedback</button>
+          <button type="button" id="clearFeedback" class="btn-ghost">Clear All</button>
+        </div>
+      </form>
+      <p class="tiny">Feedback लोकल-स्ट्रोरेज मध्ये सेव्ह होतं; जर server-side करायचं असेल तर सांग.</p>
+    </div>
+  </div>
+
+  <!-- Footer (same as index) -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Rage X cheat — Premium Theme</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header feedback modal controls (same logic as index)
+    const feedbackBtn = document.getElementById('feedbackBtn');
+    const feedbackModal = document.getElementById('feedbackModal');
+    const closeModal = document.getElementById('closeModal');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const clearFeedback = document.getElementById('clearFeedback');
+
+    function openModal() { feedbackModal.style.display = 'flex'; feedbackModal.setAttribute('aria-hidden','false'); }
+    function closeModalFn() { feedbackModal.style.display = 'none'; feedbackModal.setAttribute('aria-hidden','true'); }
+
+    if (feedbackBtn) feedbackBtn.addEventListener('click', openModal);
+    if (closeModal) closeModal.addEventListener('click', closeModalFn);
+    if (feedbackModal) feedbackModal.addEventListener('click', (e) => { if (e.target === feedbackModal) closeModalFn(); });
+
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('fbName').value.trim();
+      const msg = document.getElementById('fbMsg').value.trim();
+      const fileInput = document.getElementById('fbFile');
+
+      let fileData = null, fileName = null;
+      if (fileInput.files && fileInput.files[0]) {
+        const f = fileInput.files[0];
+        fileName = f.name;
+        fileData = await readFileAsDataURL(f);
+      }
+
+      const items = JSON.parse(localStorage.getItem('swami_feedbacks') || '[]');
+      items.push({ name, message: msg, fileName, fileData, time: Date.now() });
+      localStorage.setItem('swami_feedbacks', JSON.stringify(items));
+      feedbackForm.reset();
+      alert('Feedback saved locally.');
+      closeModalFn();
+    });
+
+    clearFeedback.addEventListener('click', () => {
+      if (!confirm('सर्व feedback हटवायचे आहेत का?')) return;
+      localStorage.removeItem('swami_feedbacks');
+      alert('सर्व feedback हटवले.');
+    });
+
+    function readFileAsDataURL(file) {
+      return new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+    }
+
+    // Price update on duration change
+    const daysSelect = document.getElementById('daysSelect');
+    const priceBadge = document.getElementById('priceBadge');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+
+    daysSelect.addEventListener('change', (e) => {
+      const opt = daysSelect.options[daysSelect.selectedIndex];
+      const price = opt.dataset.price || '199';
+      const days = opt.value;
+      priceBadge.textContent = '₹' + price;
+      // update buy link with query params
+      buyNowBtn.href = `payment.html?product=android&days=${encodeURIComponent(days)}&price=${encodeURIComponent(price)}`;
+    });
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
