@@ -115,6 +115,8 @@ a.btn-primary:hover{transform:translateY(-2px);transition:all .15s ease}
 
 
 
+<style>
+/* हीच ती CSS जी मी वर दिली */
 body {
   font-family: 'Poppins', sans-serif;
   background: #0b0c10;
@@ -122,19 +124,16 @@ body {
   text-align: center;
   margin: 0;
 }
-
 header, footer {
   background: #1f2833;
   padding: 15px;
 }
-
 .main-img {
   width: 200px;
   margin: 20px auto;
   display: block;
   border-radius: 12px;
 }
-
 .btn {
   background: #45a29e;
   color: #fff;
@@ -144,7 +143,6 @@ header, footer {
   display: inline-block;
   margin-top: 20px;
 }
-
 .payment-options button {
   background: #1f2833;
   border: 2px solid #45a29e;
@@ -154,19 +152,19 @@ header, footer {
   border-radius: 10px;
   cursor: pointer;
 }
-
 .payment-options img {
   width: 30px;
   vertical-align: middle;
   margin-right: 8px;
 }
-
 .qr-img {
   width: 200px;
   margin: 20px 0;
 }
-
 .note {
   color: #66fcf1;
   font-size: 0.9em;
 }
+</style>
+</body>
+</html>
