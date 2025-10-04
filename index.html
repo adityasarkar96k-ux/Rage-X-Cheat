@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Swami Maharaj — Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <span class="brand-name">Swami Maharaj</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button id="feedbackBtn" class="btn-link">Feedback</button>
+      </nav>
+    </div>
+    <div class="header-glow-line"></div>
+  </header>
+
+  <main class="page">
+    <!-- Our services title with arrows gif -->
+    <section class="hero center">
+      <img src="images/arrow.gif" alt="arrow-left" class="arrow left" />
+      <h2 class="section-title">OUR SERVICES</h2>
+      <img src="images/arrow.gif" alt="arrow-right" class="arrow right" />
+    </section>
+
+    <!-- Categories with checkboxes (visual) -->
+    <section class="services container">
+      <!-- For Rank Push -->
+      <div class="category">
+        <h3 class="category-title">For Rank Push</h3>
+        <div class="cards">
+          <article class="card">
+            <div class="card-media">
+              <img src="images/logo-rank-android.gif" alt="Rank Push Android GIF" />
+            </div>
+            <div class="card-body">
+              <p class="card-desc"><strong>100% safe and secure for Android</strong></p>
+              <a class="btn-primary" href="android.html">Buy Now</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-media">
+              <img src="images/logo-rank-ios.gif" alt="Rank Push iOS GIF" />
+            </div>
+            <div class="card-body">
+              <p class="card-desc"><strong>100% safe and secure for iOS</strong></p>
+              <a class="btn-primary" href="ios.html">Buy Now</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Server Hack -->
+      <div class="category">
+        <h3 class="category-title">Server Hack</h3>
+        <div class="cards single">
+          <article class="card big">
+            <div class="card-media">
+              <img src="images/server-hack.gif" alt="Server Hack GIF" />
+            </div>
+            <div class="card-body">
+              <p class="card-desc">Server Freeze</p>
+              <a class="btn-primary" href="server-hack.html">Buy Now</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Brutal -->
+      <div class="category">
+        <h3 class="category-title">Brutal</h3>
+        <div class="cards single">
+          <article class="card big">
+            <div class="card-media">
+              <img src="images/brutal.gif" alt="Brutal GIF" />
+            </div>
+            <div class="card-body">
+              <p class="card-desc">Don't use at your main ID. Use at your own risk.</p>
+              <a class="btn-primary" href="brutal.html">Buy Now</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How To Purchase -->
+    <section class="how-to container">
+      <hr class="stylish-sep" />
+      <h3 class="section-subtitle">How To Purchase</h3>
+      <ol class="steps">
+        <li>1️⃣ Select the hack which you need</li>
+        <li>2️⃣ Click on <em>Buy Now</em> button</li>
+        <li>3️⃣ Select how many days you need and price</li>
+        <li>4️⃣ Choose your payment option</li>
+        <li>5️⃣ After payment click on <em>Get Key</em> button</li>
+        <li>6️⃣ You will be redirected to Telegram in our staff chat</li>
+        <li>7️⃣ Send payment screenshot and tell which hack purchased — staff will give you key and setup</li>
+      </ol>
+      <p class="emoji-note">🔒 🔑 📩 (प्रत्येक स्टेपखाली GIF/इमोजी लावण्यासाठी तुम्ही <code>&lt;img&gt;</code> वापरू शकता.)</p>
+    </section>
+
+    <!-- Feedback list (saved feedbacks show here) -->
+    <section class="feedback container">
+      <h3 class="section-subtitle">User Feedback</h3>
+      <div id="feedbackList" class="feedback-list">
+        <!-- saved feedbacks will appear here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Feedback Modal / Panel -->
+  <div id="feedbackModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="closeModal" class="close">&times;</button>
+      <h3>Feedback द्या (Saved locally)</h3>
+      <form id="feedbackForm">
+        <label>
+          नाव:
+          <input type="text" id="fbName" required placeholder="तुमचे नाव" />
+        </label>
+        <label>
+          Message:
+          <textarea id="fbMsg" required placeholder="तुमचा message"></textarea>
+        </label>
+        <label>
+          Attach file (optional):
+          <input type="file" id="fbFile" accept="image/*,application/pdf" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Send Feedback</button>
+          <button type="button" id="clearFeedback" class="btn-ghost">Clear All</button>
+        </div>
+      </form>
+      <p class="tiny">Feedback लोकल-स्ट्रोरेज मध्ये सेव्ह होतं; तुम्हाला server-side हव असेल तर मी तसाही code देऊ शकतो.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Swami Maharaj — Premium Theme</p>
+    </div>
+  </footer>
+
+  <script>
+    // Basic interactive JS: feedback save to localStorage, show list, attachments stored as base64
+    const feedbackBtn = document.getElementById('feedbackBtn');
+    const feedbackModal = document.getElementById('feedbackModal');
+    const closeModal = document.getElementById('closeModal');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackList = document.getElementById('feedbackList');
+    const clearFeedback = document.getElementById('clearFeedback');
+
+    function openModal() { feedbackModal.style.display = 'flex'; feedbackModal.setAttribute('aria-hidden','false'); }
+    function closeModalFn() { feedbackModal.style.display = 'none'; feedbackModal.setAttribute('aria-hidden','true'); }
+
+    feedbackBtn.addEventListener('click', openModal);
+    closeModal.addEventListener('click', closeModalFn);
+    feedbackModal.addEventListener('click', (e) => { if (e.target === feedbackModal) closeModalFn(); });
+
+    // load saved feedbacks
+    function loadFeedbacks() {
+      const items = JSON.parse(localStorage.getItem('swami_feedbacks') || '[]');
+      feedbackList.innerHTML = '';
+      if (items.length === 0) {
+        feedbackList.innerHTML = '<p class="muted">अद्याप कोणतेही feedback नाही.</p>';
+        return;
+      }
+      items.reverse().forEach((fb, idx) => {
+        const el = document.createElement('div');
+        el.className = 'fb-item';
+        el.innerHTML = `
+          <div class="fb-head">
+            <strong>${escapeHtml(fb.name)}</strong>
+            <span class="fb-date">${new Date(fb.time).toLocaleString()}</span>
+          </div>
+          <p class="fb-msg">${escapeHtml(fb.message)}</p>
+        `;
+        if (fb.fileName && fb.fileData) {
+          const a = document.createElement('a');
+          a.href = fb.fileData;
+          a.download = fb.fileName;
+          a.textContent = 'Download attachment';
+          a.className = 'fb-download';
+          el.appendChild(a);
+        }
+        feedbackList.appendChild(el);
+      });
+    }
+
+    function escapeHtml(text) {
+      return (''+text).replace(/[&<>"']/g, function(m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+    }
+
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('fbName').value.trim();
+      const msg = document.getElementById('fbMsg').value.trim();
+      const fileInput = document.getElementById('fbFile');
+
+      let fileData = null, fileName = null;
+      if (fileInput.files && fileInput.files[0]) {
+        const f = fileInput.files[0];
+        fileName = f.name;
+        fileData = await readFileAsDataURL(f); // base64
+      }
+
+      const items = JSON.parse(localStorage.getItem('swami_feedbacks') || '[]');
+      items.push({ name, message: msg, fileName, fileData, time: Date.now() });
+      localStorage.setItem('swami_feedbacks', JSON.stringify(items));
+      feedbackForm.reset();
+      loadFeedbacks();
+      alert('Feedback saved locally.');
+      closeModalFn();
+    });
+
+    clearFeedback.addEventListener('click', () => {
+      if (!confirm('सर्व feedback हटवायचे आहेत का?')) return;
+      localStorage.removeItem('swami_feedbacks');
+      loadFeedbacks();
+    });
+
+    function readFileAsDataURL(file) {
+      return new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+    }
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // init
+    loadFeedbacks();
+  </script>
+</body>
+</html>
