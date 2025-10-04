@@ -1,30 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Key - Rage X Cheat</title>
-<link rel="stylesheet" href="style.css">
-<script>
-  setTimeout(() => {
-    window.location.href = "https://t.me/RageXStaff"; // your telegram link here
-  }, 2000);
-</script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Rage X Cheat — Get Key</title>
 </head>
-<body>
+<body style="margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:#fff;color:#111;">
 
-<header>
-  <h1>Rage X Cheat</h1>
-</header>
+  <header style="background:linear-gradient(90deg,#000,#111);padding:16px 12px;color:#fff;text-align:center;font-weight:800;">
+    <div style="max-width:1100px;margin:0 auto;">Rage X Cheat</div>
+  </header>
 
-<main>
-  <h2>Redirecting to Telegram Staff...</h2>
-  <p>Please wait a moment.</p>
-</main>
+  <main style="max-width:900px;margin:60px auto;text-align:center;padding:0 18px;">
+    <h2 style="font-size:22px;margin-bottom:6px;">Get Your Key</h2>
+    <p id="infoLine" style="color:#444;margin-bottom:18px;">Preparing redirect to Telegram staff for key delivery...</p>
 
-<footer>
-  <p>© 2025 Rage X Cheat</p>
-</footer>
+    <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:inline-block;">
+      <p style="margin:0 0 10px;font-weight:700;">Step 1 — Make sure Telegram is installed on your device</p>
+      <p style="margin:0 0 14px;color:#666">If you're on desktop you can use Telegram Desktop or the web app.</p>
+
+      <p style="margin:8px 0 0;"><strong>Redirecting in <span id="count">3</span>s ...</strong></p>
+      <p style="margin-top:12px;color:#117a65;font-weight:600;">If the redirect doesn't work click the button below</p>
+
+      <div style="margin-top:12px;">
+        <a id="goBtn" href="#" style="display:inline-block;background:linear-gradient(180deg,#000,#111);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;">Open Telegram</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:#111;padding:16px;color:#bbb;text-align:center;margin-top:60px;border-top:3px solid #000;">
+    © <span id="yr2"></span> Rage X Cheat
+  </footer>
+
+  <script>
+    // read query params to show product/price (optional)
+    function qp(k){ return new URLSearchParams(window.location.search).get(k); }
+    const product = qp('product') || '';
+    const price = qp('price') || '';
+    const method = qp('method') || '';
+    const days = qp('days') || '';
+
+    // show summary to user (optional)
+    const info = [];
+    if(product) info.push(`Product: ${product}`);
+    if(days) info.push(`Duration: ${days}`);
+    if(price) info.push(`Price: ₹${price}`);
+    if(method) info.push(`Method: ${method}`);
+    if(info.length) document.getElementById('infoLine').innerText = info.join(' • ');
+
+    // Telegram link (replace with your staff link)
+    const telegramURL = "https://t.me/RageXStaff"; // <-- CHANGE to your staff link
+
+    // set direct button
+    document.getElementById('goBtn').href = telegramURL;
+    document.getElementById('yr2').textContent = new Date().getFullYear();
+
+    // auto redirect countdown
+    let t = 3;
+    const span = document.getElementById('count');
+    const itv = setInterval(()=> {
+      t--;
+      span.textContent = t;
+      if(t<=0){
+        clearInterval(itv);
+        // redirect to telegram
+        window.location.href = telegramURL;
+      }
+    },1000);
+  </script>
+
+  <style>
+    /* small CSS */
+    body{font-family:Inter,Segoe UI,Roboto,Arial;}
+  </style>
 
 </body>
 </html>
