@@ -1,78 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rage X Cheat — Get Key</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:#fff;color:#111;">
+<body>
 
-  <header style="background:linear-gradient(90deg,#000,#111);padding:16px 12px;color:#fff;text-align:center;font-weight:800;">
-    <div style="max-width:1100px;margin:0 auto;">Rage X Cheat</div>
-  </header>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand-name">Rage X Cheat</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="android.html">Android</a>
+      <a href="ios.html">iOS</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="header-glow-line"></div>
+</header>
 
-  <main style="max-width:900px;margin:60px auto;text-align:center;padding:0 18px;">
-    <h2 style="font-size:22px;margin-bottom:6px;">Get Your Key</h2>
-    <p id="infoLine" style="color:#444;margin-bottom:18px;">Preparing redirect to Telegram staff for key delivery...</p>
+<main class="page center" style="flex-direction:column;">
+  <h2>Get Your Key</h2>
+  <p style="color:var(--muted);text-align:center;">Click below to contact our Telegram staff to receive your activation key.</p>
+  <a href="https://t.me/yourtelegramlink" class="btn-primary" style="margin-top:20px;">Open Telegram</a>
+  <p class="note" style="margin-top:10px;">Make sure Telegram is installed before clicking the button.</p>
+</main>
 
-    <div style="background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:inline-block;">
-      <p style="margin:0 0 10px;font-weight:700;">Step 1 — Make sure Telegram is installed on your device</p>
-      <p style="margin:0 0 14px;color:#666">If you're on desktop you can use Telegram Desktop or the web app.</p>
-
-      <p style="margin:8px 0 0;"><strong>Redirecting in <span id="count">3</span>s ...</strong></p>
-      <p style="margin-top:12px;color:#117a65;font-weight:600;">If the redirect doesn't work click the button below</p>
-
-      <div style="margin-top:12px;">
-        <a id="goBtn" href="#" style="display:inline-block;background:linear-gradient(180deg,#000,#111);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;">Open Telegram</a>
-      </div>
-    </div>
-  </main>
-
-  <footer style="background:#111;padding:16px;color:#bbb;text-align:center;margin-top:60px;border-top:3px solid #000;">
-    © <span id="yr2"></span> Rage X Cheat
-  </footer>
-
-  <script>
-    // read query params to show product/price (optional)
-    function qp(k){ return new URLSearchParams(window.location.search).get(k); }
-    const product = qp('product') || '';
-    const price = qp('price') || '';
-    const method = qp('method') || '';
-    const days = qp('days') || '';
-
-    // show summary to user (optional)
-    const info = [];
-    if(product) info.push(`Product: ${product}`);
-    if(days) info.push(`Duration: ${days}`);
-    if(price) info.push(`Price: ₹${price}`);
-    if(method) info.push(`Method: ${method}`);
-    if(info.length) document.getElementById('infoLine').innerText = info.join(' • ');
-
-    // Telegram link (replace with your staff link)
-    const telegramURL = "https://t.me/RageXStaff"; // <-- CHANGE to your staff link
-
-    // set direct button
-    document.getElementById('goBtn').href = telegramURL;
-    document.getElementById('yr2').textContent = new Date().getFullYear();
-
-    // auto redirect countdown
-    let t = 3;
-    const span = document.getElementById('count');
-    const itv = setInterval(()=> {
-      t--;
-      span.textContent = t;
-      if(t<=0){
-        clearInterval(itv);
-        // redirect to telegram
-        window.location.href = telegramURL;
-      }
-    },1000);
-  </script>
-
-  <style>
-    /* small CSS */
-    body{font-family:Inter,Segoe UI,Roboto,Arial;}
-  </style>
+<footer class="site-footer">
+  <p>© 2025 Rage X Cheat | Secure Access</p>
+</footer>
 
 </body>
 </html>
